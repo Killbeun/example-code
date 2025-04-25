@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{% block title %} Уборка # {{ event['number'] }} от {{ event['date'] }} {% endblock %}</h2>
+{% if event['deal_status']==True %}
+<span class="badge bg-success"> Проведена</span>
+{% else %}
+<span class="badge bg-danger"> Назначена</span>
+{% endif %}
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Позиция</th>
+            <th scope="col">Значение</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Номер</th>
+            <td>{{ event['address'] }}</th>
+        </tr>
+        <tr>
+            <td>Расход</th>
+            <td>{{ event['price'] }} ₽</th>
+        </tr>
+        <tr>
+            <td>Сотрудник</th>
+            <td>{{ event['name'] }}</th>
+        </tr>
+        <tr>
+            <td>Контакты сотрудника</th>
+            <td>тел.: {{ event['phone_number'] }}, почта: {{ event['email'] }}</th>
+        </tr>
+        <tr>
+            <td>Описание</th>
+            <td>{{ event['description'] }}</th>
+        </tr>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-auto">
+        <a href="/clients">
+            <button type="submit" class="btn btn-secondary"><i class="bi-people"></i> Перейти к сотруднику</button>
+        </a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('contract', contract_id=event['id_contract']) }}">
+            <button type="submit" class="btn btn-secondary"><i class="bi-file-earmark-binary"></i> Перейти к отчету</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
